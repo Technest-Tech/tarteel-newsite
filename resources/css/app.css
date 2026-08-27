@@ -1,0 +1,4 @@
+/* The site is hand-written CSS: one stylesheet for the public page, one for
+   the admin panel. Both are bundled by Vite into a single production file. */
+@import './landing.css';
+@import './admin.css';
