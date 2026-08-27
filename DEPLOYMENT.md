@@ -7,8 +7,16 @@ pre-built CSS/JS. Nothing runs Node in production.
 
 ## 1. PHP version and extensions
 
-Set the domain's PHP version to **8.3 or 8.4** in hPanel → *Advanced* → *PHP
-Configuration*. Enable these extensions (all are available on Hostinger):
+Set the domain's PHP version to **8.4** in hPanel → *Advanced* → *PHP
+Configuration*. `composer.lock` pins Symfony 8.1, which requires PHP >= 8.4.1,
+so 8.3 is not enough. On Hostinger the version can also be set for one
+directory only, which is what the shipped root `.htaccess` does:
+
+```apache
+AddHandler application/x-httpd-alt-php84___lsphp .php
+```
+
+Enable these extensions (all are available on Hostinger):
 
 `bcmath`, `ctype`, `curl`, `dom`, `fileinfo`, `filter`, `hash`, `mbstring`,
 `openssl`, `pcre`, `pdo`, `pdo_mysql`, `session`, `tokenizer`, `xml`, `zip`
@@ -153,6 +161,10 @@ npm install
 npm run build
 ```
 
+Build **locally**, not on the server: Vite 8's Rolldown bundler cannot start its
+thread pool inside Hostinger's process limits and panics with
+`The global thread pool has not been initialized`.
+
 Upload the generated `public/build/` directory (it contains `manifest.json` and
 the hashed CSS/JS files). Repeat this whenever anything in `resources/css` or
 `resources/js` changes. Without `public/build`, every page throws a
@@ -166,7 +178,14 @@ the hashed CSS/JS files). Repeat this whenever anything in `resources/css` or
 directory (hPanel → *Websites* → *Manage* → *Website settings* → *Document
 root*), e.g. `/domains/your-domain.com/tarteel/public`.
 
-**If the document root cannot be changed** (it is locked to `public_html`):
+**If the document root cannot be changed** (on Hostinger a subdomain's root is
+the project folder itself), keep the shipped root `.htaccess`: it forwards every
+request into `public/` and returns 403 for `app/`, `config/`, `database/`,
+`resources/`, `routes/`, `storage/`, `tests/`, `vendor/`, `media/` and `.git/`,
+so nothing above `public/` is reachable. This is how
+`tartel.technest-agency.com` is deployed.
+
+**Alternative, if the project must live outside the web root:**
 
 1. Upload the whole project **one level above** `public_html`, e.g.
    `~/domains/your-domain.com/tarteel`, so `.env`, `vendor`, `storage`,
@@ -228,6 +247,10 @@ php artisan optimize:clear
 
 Individual commands if you need them: `config:clear`, `route:clear`,
 `view:clear`, `cache:clear`.
+
+The caches store absolute paths, so always run `optimize` **after** the project
+sits in its final directory. Caching from a staging directory and then moving
+the project produces a blank HTTP 500 with nothing in `storage/logs`.
 
 Because config is cached in production, `env()` must never be called outside
 `config/*.php`. This project already follows that rule.

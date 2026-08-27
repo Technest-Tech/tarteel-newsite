@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------------------
+# Tarteel Academy — document root for tartel.technest-agency.com
+#
+# hPanel points this subdomain at the project folder rather than at Laravel's
+# public/ directory, so every request is forwarded into public/ here and the
+# application source above it is never served.
+# ---------------------------------------------------------------------------
+
+# Laravel 13 requires PHP >= 8.4; the account default is 8.2.
+AddHandler application/x-httpd-alt-php84___lsphp .php
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks -Indexes
+    RewriteEngine On
+
+    # Never serve the application source, even by direct path.
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|media|node_modules|\.git)(/|$) - [F,L]
+
+    # Forward everything else into public/, where Laravel's own .htaccess
+    # takes over. The lookahead keeps the rewrite from re-entering itself.
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>
+
+# Belt and braces: deny the loose project files if mod_rewrite is ever off.
+<FilesMatch "^(\.env.*|\.htaccess|composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|vite\.config\.js|\.gitignore|\.gitattributes|\.editorconfig|\.npmrc|.*\.md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
