@@ -97,6 +97,7 @@
                 <a href="#why-us" data-ar="لماذا ترتيل؟" data-en="Why Tarteel">Why Tarteel</a>
                 <a href="#journey" data-ar="كيف نبدأ؟" data-en="How it works">How it works</a>
                 <a href="#classroom" data-ar="من فصولنا" data-en="Our classes">Our classes</a>
+                <a href="#pricing" data-ar="الأسعار" data-en="Pricing">Pricing</a>
                 <a href="#stories" data-ar="آراء الطلاب" data-en="Stories">Stories</a>
                 <a href="#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">FAQ</a>
             </nav>
@@ -413,7 +414,81 @@
             </div>
         </section>
 
-        {{-- I. Testimonials --------------------------------------------------- --}}
+        {{-- I. Pricing -------------------------------------------------------- --}}
+        <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div>
+                        <span class="section-kicker" data-ar="الأسعار" data-en="Pricing">Pricing</span>
+                        <h2 id="pricing-title" data-ar="خطط واضحة، بلا رسوم خفية" data-en="Clear plans, no hidden fees">Clear plans, no hidden fees</h2>
+                    </div>
+                    <p data-ar="اختر مدة الحصة التي تناسبك، ثم عدد الحصص أسبوعياً. الأسعار شهرية بالدولار الأمريكي، وكل حصة فردية مباشرة مع معلمك." data-en="Choose the lesson length that suits you, then how many lessons a week. Prices are monthly in US dollars, and every lesson is live and one-to-one.">Choose the lesson length that suits you, then how many lessons a week. Prices are monthly in US dollars, and every lesson is live and one-to-one.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    @foreach ($pricing['packages'] as $package)
+                        <article class="pricing-card @if ($package['featured']) pricing-featured @endif reveal">
+                            <div class="pricing-head">
+                                <span class="pricing-minutes" aria-hidden="true">
+                                    <strong>{{ $package['minutes'] }}</strong>
+                                    <small data-ar="دقيقة" data-en="min">min</small>
+                                </span>
+                                <h3 data-ar="{{ $package['name_ar'] }}" data-en="{{ $package['name_en'] }}">{{ $package['name_en'] }}</h3>
+                                <p class="pricing-tagline" data-ar="{{ $package['tagline_ar'] }}" data-en="{{ $package['tagline_en'] }}">{{ $package['tagline_en'] }}</p>
+                                <p class="pricing-rate">
+                                    <strong dir="ltr">{{ $pricing['symbol'] }}{{ $package['per_class'] }}</strong>
+                                    <span data-ar="لكل حصة" data-en="per lesson">per lesson</span>
+                                </p>
+                            </div>
+
+                            <ul class="pricing-tiers">
+                                @foreach ($package['tiers'] as $tier)
+                                    @php
+                                        // Arabic counts its nouns differently either side of ten:
+                                        // two takes the dual, three to ten the plural, eleven up
+                                        // the singular. English just needs the plural.
+                                        $weekAr = $tier['week'] === 2
+                                            ? 'حصتان أسبوعياً'
+                                            : $tier['week'] . ' حصص أسبوعياً';
+                                        $monthAr = $tier['month'] <= 10
+                                            ? $tier['month'] . ' حصص شهرياً'
+                                            : $tier['month'] . ' حصة شهرياً';
+                                    @endphp
+                                    <li>
+                                        <span class="tier-week" data-ar="{{ $weekAr }}" data-en="{{ $tier['week'] }} lessons a week">{{ $tier['week'] }} lessons a week</span>
+                                        <span class="tier-month" data-ar="{{ $monthAr }}" data-en="{{ $tier['month'] }} lessons a month">{{ $tier['month'] }} lessons a month</span>
+                                        <span class="tier-price">
+                                            <strong dir="ltr">{{ $pricing['symbol'] }}{{ $tier['price'] }}</strong>
+                                            <small data-ar="شهرياً" data-en="a month">a month</small>
+                                        </span>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <a class="pricing-cta" href="#enroll">
+                                <span data-ar="ابدأ بهذه الباقة" data-en="Start with this plan">Start with this plan</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </article>
+                    @endforeach
+                </div>
+
+                <div class="pricing-extras reveal">
+                    <h3 class="pricing-extras-title" data-ar="ما الذي تحصل عليه في كل باقة؟" data-en="What every plan includes">What every plan includes</h3>
+                    <ul class="pricing-includes">
+                        @foreach ($pricing['includes'] as $include)
+                            <li>
+                                <span class="include-tick" aria-hidden="true">✓</span>
+                                <span data-ar="{{ $include['ar'] }}" data-en="{{ $include['en'] }}">{{ $include['en'] }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <p class="pricing-note" data-ar="حصتك التجريبية الأولى مجانية دائماً، ولا يوجد رسم تسجيل. إن لم تجد ما يناسبك هنا، راسلنا ونرتّب خطة على مقاسك." data-en="Your first trial lesson is always free and there is no registration fee. If none of these fit, message us and we will arrange a plan around you.">Your first trial lesson is always free and there is no registration fee. If none of these fit, message us and we will arrange a plan around you.</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- J. Testimonials --------------------------------------------------- --}}
         <section class="section stories" id="stories" aria-labelledby="stories-title">
             <div class="container">
                 <div class="section-heading reveal">
@@ -434,7 +509,9 @@
                             <span class="quote-mark" aria-hidden="true">“</span>
                             <p data-ar="{{ $testimonial['quote_ar'] }}" data-en="{{ $testimonial['quote_en'] }}">{{ $testimonial['quote_en'] }}</p>
                             <footer>
-                                <span class="person-avatar" aria-hidden="true">{{ $testimonial['initials'] }}</span>
+                                <span class="person-avatar" aria-hidden="true"
+                                      data-ar="{{ $testimonial['initials_ar'] }}"
+                                      data-en="{{ $testimonial['initials_en'] }}">{{ $testimonial['initials_en'] }}</span>
                                 <div>
                                     <strong data-ar="{{ $testimonial['name_ar'] }}" data-en="{{ $testimonial['name_en'] }}">{{ $testimonial['name_en'] }}</strong>
                                     <small data-ar="{{ $testimonial['role_ar'] }}" data-en="{{ $testimonial['role_en'] }}">{{ $testimonial['role_en'] }}</small>
@@ -446,7 +523,7 @@
             </div>
         </section>
 
-        {{-- J. FAQ ------------------------------------------------------------ --}}
+        {{-- K. FAQ ------------------------------------------------------------ --}}
         <section class="section faq" id="faq" aria-labelledby="faq-title">
             <div class="container faq-grid">
                 <div class="faq-intro reveal">
@@ -475,7 +552,7 @@
             </div>
         </section>
 
-        {{-- J. Enrollment ------------------------------------------------------ --}}
+        {{-- L. Enrollment ------------------------------------------------------ --}}
         <section class="section enrollment-section" id="enroll" aria-labelledby="enroll-title">
             <div class="container enrollment-wrap">
                 <div class="enrollment-copy reveal">
@@ -646,7 +723,7 @@
         </section>
     </main>
 
-    {{-- K. Footer ------------------------------------------------------------ --}}
+    {{-- M. Footer ------------------------------------------------------------ --}}
     <footer class="site-footer">
         <div class="container footer-main">
             <div class="footer-brand">

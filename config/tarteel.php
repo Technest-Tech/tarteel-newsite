@@ -43,6 +43,80 @@ return [
         'x' => env('ACADEMY_X', ''),
     ],
 
+    /*
+    | Monthly plans, taken from the academy's published package sheets. Every
+    | tier inside a package bills at the same per-class rate, so `per_class` is
+    | stated once per package instead of being repeated on each row — and it is
+    | the figure to re-check first if a price here ever changes.
+    */
+    'pricing' => [
+        'currency' => 'USD',
+        'symbol' => '$',
+
+        'packages' => [
+            [
+                'key' => 'half-hour',
+                'minutes' => 30,
+                'name_ar' => 'الباقة الأولى',
+                'name_en' => 'First package',
+                'tagline_ar' => 'نصف ساعة لكل حصة',
+                'tagline_en' => 'Half-hour lessons',
+                'per_class' => '3.50',
+                'featured' => false,
+                'tiers' => [
+                    ['week' => 3, 'month' => 12, 'price' => 42],
+                    ['week' => 4, 'month' => 16, 'price' => 56],
+                    ['week' => 5, 'month' => 20, 'price' => 70],
+                ],
+            ],
+            [
+                'key' => 'forty-five',
+                'minutes' => 45,
+                'name_ar' => 'الباقة الثانية',
+                'name_en' => 'Second package',
+                'tagline_ar' => '45 دقيقة لكل حصة',
+                'tagline_en' => '45-minute lessons',
+                'per_class' => '5.25',
+                // Visual emphasis only: the middle card carries the filled
+                // treatment the way the first program card does. It is not a
+                // popularity claim, so it needs no badge.
+                'featured' => true,
+                'tiers' => [
+                    ['week' => 2, 'month' => 8, 'price' => 42],
+                    ['week' => 3, 'month' => 12, 'price' => 63],
+                    ['week' => 4, 'month' => 16, 'price' => 84],
+                    ['week' => 5, 'month' => 20, 'price' => 105],
+                ],
+            ],
+            [
+                'key' => 'full-hour',
+                'minutes' => 60,
+                'name_ar' => 'الباقة الثالثة',
+                'name_en' => 'Third package',
+                'tagline_ar' => 'ساعة كاملة لكل حصة',
+                'tagline_en' => 'Full-hour lessons',
+                'per_class' => '7.00',
+                'featured' => false,
+                'tiers' => [
+                    ['week' => 2, 'month' => 8, 'price' => 56],
+                    ['week' => 3, 'month' => 12, 'price' => 84],
+                    ['week' => 4, 'month' => 16, 'price' => 112],
+                    ['week' => 5, 'month' => 20, 'price' => 140],
+                ],
+            ],
+        ],
+
+        // Included with every package, whichever tier the family chooses.
+        'includes' => [
+            ['ar' => 'معلمون مؤهلون', 'en' => 'Qualified teachers'],
+            ['ar' => 'تعلّم تفاعلي', 'en' => 'Interactive learning'],
+            ['ar' => 'مواعيد مرنة', 'en' => 'Flexible schedule'],
+            ['ar' => 'بيئة آمنة وداعمة', 'en' => 'Safe, supportive environment'],
+            ['ar' => 'شهادة إتمام', 'en' => 'Certificate of completion'],
+            ['ar' => 'متابعة دورية للتقدّم', 'en' => 'Regular progress tracking'],
+        ],
+    ],
+
     // Editable marketing figures. Update the numbers, keep the two labels.
     'stats' => [
         ['value' => '+500', 'value_en' => '500+', 'ar' => 'طالب وطالبة', 'en' => 'happy students'],
@@ -56,34 +130,72 @@ return [
         'scale' => '5',
     ],
 
-    // Testimonials use initials on purpose: no AI-generated faces.
+    /*
+    | Real messages families sent the academy on WhatsApp, transcribed rather
+    | than screenshotted: the originals carry contact names, profile photos and
+    | phone numbers that have no business on a public page. Names are kept to
+    | the form the sender used, and each quote is tidied only for punctuation.
+    */
     'testimonials' => [
         [
-            'initials' => 'SA',
-            'name_ar' => 'سارة أحمد',
-            'name_en' => 'Sarah Ahmed',
-            'role_ar' => 'والدة آدم · المملكة المتحدة',
-            'role_en' => "Adam's mother · United Kingdom",
-            'quote_ar' => 'ابني أصبح ينتظر موعد الحصة! أسلوب المعلم هادئ ومشجع، وتطوّره في القراءة واضح جداً خلال أسابيع.',
-            'quote_en' => 'My son now looks forward to every lesson. His teacher is patient and encouraging, and the progress in his reading is already so clear.',
+            'initials_ar' => 'ه',
+            'initials_en' => 'H',
+            'name_ar' => 'حمودي',
+            'name_en' => 'Hammudi',
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'والله المعلم هو الأفضل، يجعل كل خطوة أسهل ما تكون على الفهم.',
+            'quote_en' => 'Wallahi, the teacher is the best — he makes every step the easiest to understand.',
         ],
         [
-            'initials' => 'MK',
-            'name_ar' => 'مريم خالد',
-            'name_en' => 'Mariam Khaled',
-            'role_ar' => 'طالبة · كندا',
-            'role_en' => 'Adult learner · Canada',
-            'quote_ar' => 'كنت أخاف من أحكام التجويد، لكن الخطة البسيطة والتطبيق المستمر جعلاها مفهومة وممتعة.',
-            'quote_en' => 'Tajweed used to feel intimidating. The simple plan and consistent practice have made it clear — and genuinely enjoyable.',
+            'initials_ar' => 'أز',
+            'initials_en' => 'UZ',
+            'name_ar' => 'أم زينب',
+            'name_en' => 'Umm Zainab',
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'أنا سعيدة بأسلوب المعلمة إسراء في التدريس، وبالإدارة كذلك. من الرائع أنكم سريعون في الرد على الرسائل ومتعاونون جداً.',
+            'quote_en' => "I am pleased with teacher Esraa's teaching style, and with your admin too. It is great that you are prompt in replying to messages and quite accommodating.",
         ],
         [
-            'initials' => 'OH',
-            'name_ar' => 'عمر حسن',
-            'name_en' => 'Omar Hassan',
-            'role_ar' => 'والد ليان · أستراليا',
-            'role_en' => "Layan's father · Australia",
-            'quote_ar' => 'أكثر ما أعجبني هو المتابعة. أعرف دائماً أين وصلت ابنتي وما الذي نعمل عليه في الشهر القادم.',
-            'quote_en' => 'The follow-up is what I value most. I always know where my daughter stands and what she is working toward next.',
+            'initials_ar' => 'مع',
+            'initials_en' => 'MO',
+            'name_ar' => 'منى عمر',
+            'name_en' => 'Muna Omer',
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'نعم، أنصح أكاديمية ترتيل لأصدقائي وأقاربي، لأن أسلوب التدريس عندهم متقدم ويجعل طفلي سعيداً.',
+            'quote_en' => 'Yes, I would recommend Tarteel Academy to my friends and relatives, because their teaching is advanced and it makes my child happy.',
+        ],
+        [
+            'initials_ar' => 'أص',
+            'initials_en' => 'US',
+            'name_ar' => 'أم صالح',
+            'name_en' => 'Umm Saleh',
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'ما شاء الله، كلهم ممتازون، وتعاملهم مع أطفالي جميل وحنون. الله يسعدهم ويزيدهم علماً.',
+            'quote_en' => 'Mashallah, they are all excellent, and they are kind and gentle with my children. May God grant them happiness and increase them in knowledge.',
+        ],
+        [
+            'initials_ar' => 'ط',
+            'initials_en' => 'T',
+            'name_ar' => 'من طلاب الأكاديمية',
+            'name_en' => 'A Tarteel student',
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'أعتبر نفسي محظوظاً لأن الأستاذة أسماء معلمتي. وأنا ممتن حقاً لدعمكم الأكاديمي.',
+            'quote_en' => 'I consider myself a lucky person because I have Ms. Asma as my teacher. I am also really thankful for your academic support.',
+        ],
+        [
+            'initials_ar' => 'ع',
+            'initials_en' => 'AP',
+            'name_ar' => 'ولي أمر علي',
+            'name_en' => "Ali's parent",
+            'role_ar' => 'رسالة عبر واتساب',
+            'role_en' => 'Message via WhatsApp',
+            'quote_ar' => 'يعجبنا كثيراً أسلوب المعلم في تدريس علي؛ فهو ودود وواضح. وقد رشّحناكم للكثيرين لدروس العربية والقرآن. شكراً لكم.',
+            'quote_en' => 'We really like the approach the teacher uses to teach Ali — he is friendly and clear. We have referred many people to you for Arabic and Quran classes. Thank you.',
         ],
     ],
 

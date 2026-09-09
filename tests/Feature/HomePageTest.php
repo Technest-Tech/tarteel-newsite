@@ -18,7 +18,7 @@ class HomePageTest extends TestCase
         $response->assertSee('Tarteel Academy', false);
         $response->assertSee('Learn with heart.', false);
 
-        foreach (['id="programs"', 'id="why-us"', 'id="journey"', 'id="stories"', 'id="faq"', 'id="enroll"'] as $section) {
+        foreach (['id="programs"', 'id="why-us"', 'id="journey"', 'id="pricing"', 'id="stories"', 'id="faq"', 'id="enroll"'] as $section) {
             $response->assertSee($section, false);
         }
     }
@@ -63,5 +63,51 @@ class HomePageTest extends TestCase
         $response->assertSee('images/hero-quran-online-modest.webp', false);
         $response->assertSee('images/hero-quran-online-modest.png', false);
         $response->assertSee('twitter:card', false);
+    }
+
+    public function test_every_configured_plan_and_tier_is_priced_on_the_page(): void
+    {
+        $response = $this->get('/');
+
+        foreach (config('tarteel.pricing.packages') as $package) {
+            $response->assertSee('data-en="'.$package['tagline_en'].'"', false);
+            $response->assertSee('$'.$package['per_class'], false);
+
+            foreach ($package['tiers'] as $tier) {
+                $response->assertSee($tier['week'].' lessons a week', false);
+                $response->assertSee('$'.$tier['price'], false);
+            }
+        }
+
+        foreach (config('tarteel.pricing.includes') as $include) {
+            $response->assertSee('data-en="'.$include['en'].'"', false);
+        }
+    }
+
+    public function test_each_advertised_price_matches_its_stated_per_lesson_rate(): void
+    {
+        // The plan sheets quote one rate per package and a price per tier. If a
+        // number is ever mistyped the two stop agreeing, which is the cheapest
+        // possible way to catch it.
+        foreach (config('tarteel.pricing.packages') as $package) {
+            foreach ($package['tiers'] as $tier) {
+                $this->assertSame(
+                    (float) $package['per_class'],
+                    round($tier['price'] / $tier['month'], 2),
+                    "{$package['minutes']}-minute plan: \${$tier['price']} over {$tier['month']} lessons "
+                    ."does not match the stated \${$package['per_class']} per lesson.",
+                );
+            }
+        }
+    }
+
+    public function test_the_testimonials_carry_both_languages(): void
+    {
+        $response = $this->get('/');
+
+        foreach (config('tarteel.testimonials') as $testimonial) {
+            $response->assertSee('data-ar="'.e($testimonial['quote_ar']).'"', false);
+            $response->assertSee('data-en="'.e($testimonial['quote_en']).'"', false);
+        }
     }
 }

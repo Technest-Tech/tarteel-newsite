@@ -1245,6 +1245,307 @@ html[lang="ar"] :is(.section-heading h2, .center-heading h2, .why-copy h2, .faq-
 
 /* --------------------------------------------------------------- stories */
 
+/* --------------------------------------------------------------- pricing */
+
+.pricing {
+    background: var(--cream);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    /* Stretched rather than start-aligned: the half-hour plan has one tier
+       fewer than the others, and letting the cards equalise keeps the three
+       "Start with this plan" buttons on the same line. */
+    align-items: stretch;
+}
+
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    padding: 1.9rem;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pricing-card::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px solid rgba(105, 189, 69, .13);
+    border-radius: 50%;
+    inset-block-start: -70px;
+    inset-inline-end: -65px;
+}
+
+/* The middle card carries the filled treatment purely for rhythm, the way the
+   first program card does. It makes no claim about being the popular choice. */
+.pricing-featured {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: #fff;
+}
+
+.pricing-featured::after {
+    border-color: rgba(255, 255, 255, .15);
+}
+
+.pricing-head {
+    position: relative;
+    padding-block-end: 1.4rem;
+    border-block-end: 1px solid var(--line);
+}
+
+.pricing-featured .pricing-head {
+    border-block-end-color: var(--line-light);
+}
+
+.pricing-minutes {
+    display: grid;
+    place-items: center;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 17px;
+    background: var(--cream);
+    color: var(--forest);
+    margin-block-end: 1.4rem;
+    line-height: 1;
+}
+
+.pricing-minutes strong {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.pricing-minutes small {
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    opacity: .78;
+}
+
+.pricing-featured .pricing-minutes {
+    background: rgba(255, 255, 255, .1);
+    color: #c8e8b5;
+}
+
+.pricing-card h3 {
+    font-size: var(--fs-xl);
+    margin: 0 0 .35rem;
+    color: var(--forest);
+    line-height: 1.35;
+}
+
+.pricing-featured h3 {
+    color: #fff;
+}
+
+.pricing-tagline {
+    margin: 0 0 1.15rem;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+}
+
+.pricing-featured .pricing-tagline {
+    color: var(--muted-light);
+}
+
+.pricing-rate {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin: 0;
+}
+
+.pricing-rate strong {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--leaf-deep);
+}
+
+.pricing-featured .pricing-rate strong {
+    color: #9fdb78;
+}
+
+.pricing-rate span {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+}
+
+.pricing-featured .pricing-rate span {
+    color: var(--muted-light);
+}
+
+.pricing-tiers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.pricing-tiers li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .2rem 1rem;
+    padding-block: .95rem;
+    border-block-end: 1px solid var(--line);
+}
+
+.pricing-featured .pricing-tiers li {
+    border-block-end-color: var(--line-light);
+}
+
+.pricing-tiers li:last-child {
+    border-block-end: 0;
+    padding-block-end: 0;
+}
+
+.tier-week {
+    grid-column: 1;
+    grid-row: 1;
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--forest);
+}
+
+.pricing-featured .tier-week {
+    color: #fff;
+}
+
+.tier-month {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: var(--fs-micro);
+    color: var(--muted);
+}
+
+.pricing-featured .tier-month {
+    color: var(--muted-light);
+}
+
+.tier-price {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    gap: .1rem;
+    text-align: end;
+}
+
+.tier-price strong {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--forest);
+}
+
+.pricing-featured .tier-price strong {
+    color: #fff;
+}
+
+.tier-price small {
+    font-size: var(--fs-micro);
+    color: var(--muted);
+}
+
+.pricing-featured .tier-price small {
+    color: var(--muted-light);
+}
+
+.pricing-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-block-start: 1.5rem;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    color: var(--forest);
+    font-weight: 700;
+    font-size: var(--fs-xs);
+    transition: background .2s ease, color .2s ease;
+}
+
+.pricing-cta:hover {
+    background: var(--leaf-soft);
+}
+
+.pricing-featured .pricing-cta {
+    background: var(--leaf);
+    color: var(--forest-deep);
+}
+
+.pricing-featured .pricing-cta:hover {
+    background: #7ccb56;
+}
+
+.pricing-extras {
+    margin-block-start: 2.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.pricing-extras-title {
+    margin: 0 0 1.35rem;
+    font-size: var(--fs-lg);
+    color: var(--forest);
+}
+
+.pricing-includes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .9rem 1.75rem;
+}
+
+.pricing-includes li {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    font-size: var(--fs-sm);
+}
+
+.include-tick {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--leaf-soft);
+    color: var(--leaf-deep);
+    font-size: var(--fs-micro);
+    font-weight: 800;
+}
+
+.pricing-note {
+    margin: 1.6rem 0 0;
+    padding-block-start: 1.35rem;
+    border-block-start: 1px solid var(--line);
+    color: var(--muted);
+    font-size: var(--fs-sm);
+}
+
 .stories {
     background: #fff;
 }
@@ -1293,7 +1594,7 @@ html[lang="ar"] :is(.section-heading h2, .center-heading h2, .why-copy h2, .faq-
     flex-direction: column;
 }
 
-.story-card:nth-child(2) {
+.story-card:nth-child(3n + 2) {
     background: #eef5e8;
 }
 
@@ -1954,7 +2255,8 @@ html[lang="ar"] :is(.section-heading h2, .center-heading h2, .why-copy h2, .faq-
     .stats-strip { grid-template-columns: 1fr 1fr; padding: 1.5rem .9rem; gap: 1.4rem 0; }
     .stats-strip div:nth-child(2) { border-inline-end: 0; }
     .section-heading { grid-template-columns: 1fr; gap: 1.25rem; }
-    .program-grid, .story-grid, .classroom-grid { grid-template-columns: 1fr; }
+    .program-grid, .story-grid, .classroom-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-includes { grid-template-columns: repeat(2, 1fr); }
     .why-grid, .faq-grid, .enrollment-wrap { grid-template-columns: 1fr; }
     .why-copy { max-width: 34rem; }
     .steps { grid-template-columns: 1fr; gap: 2.75rem; }
@@ -1985,6 +2287,8 @@ html[lang="ar"] :is(.section-heading h2, .center-heading h2, .why-copy h2, .faq-
     .floating-card { max-width: 12rem; padding: .7rem .8rem; }
     .round-seal { inset-block-start: 1.25rem; }
     .benefit-grid { grid-template-columns: 1fr; }
+    .pricing-includes { grid-template-columns: 1fr; }
+    .pricing-card { padding: 1.5rem; }
     .form-grid { grid-template-columns: 1fr; }
     .full-field { grid-column: auto; }
     .footer-main { grid-template-columns: 1fr; }

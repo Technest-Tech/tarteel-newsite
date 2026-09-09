@@ -10,6 +10,7 @@ class HomeController extends Controller
     {
         return view('landing', [
             'stats' => config('tarteel.stats'),
+            'pricing' => config('tarteel.pricing'),
             'testimonials' => config('tarteel.testimonials'),
             'contact' => config('tarteel.contact'),
             'social' => array_filter(config('tarteel.social')),

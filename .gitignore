@@ -25,3 +25,10 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Source screenshots of the WhatsApp feedback. They carry senders' names,
+# profile photos and phone numbers, and this repository is public, so the
+# quotes live in config/tarteel.php instead and the originals stay local.
+/feedback*.jpeg
+/feedback*.jpg
+/feedback*.png
