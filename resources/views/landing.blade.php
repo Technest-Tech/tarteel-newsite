@@ -404,6 +404,73 @@
                     </article>
                 </div>
 
+                <div class="classroom-language-heading reveal">
+                    <span class="classroom-language-mark" aria-hidden="true">EN</span>
+                    <div>
+                        <h3 data-ar="حصص باللغة الإنجليزية" data-en="Lessons in English">Lessons in English</h3>
+                        <p data-ar="نماذج من حصص اللغة الإنجليزية ودروس القرآن المقدّمة للطلاب الناطقين بالإنجليزية." data-en="English-language learning and Quran support designed for English-speaking students.">English-language learning and Quran support designed for English-speaking students.</p>
+                    </div>
+                </div>
+
+                <div class="classroom-grid classroom-grid-english">
+                    <article class="lesson-video-card lesson-video-card-english reveal">
+                        <div class="lesson-video-frame">
+                            <video controls playsinline preload="none"
+                                poster="{{ asset('images/english-reading-lesson-poster.jpg') }}"
+                                data-label-ar="مقطع من حصة قراءة باللغة الإنجليزية"
+                                data-label-en="A clip from a live English reading lesson"
+                                aria-label="A clip from a live English reading lesson">
+                                <source src="{{ asset('videos/english-reading-lesson.mp4') }}" type="video/mp4">
+                                <span data-ar="متصفحك لا يدعم تشغيل الفيديو." data-en="Your browser does not support video playback.">Your browser does not support video playback.</span>
+                            </video>
+                            <span class="lesson-duration" aria-hidden="true">02:17</span>
+                        </div>
+                        <div class="lesson-video-copy">
+                            <span class="lesson-type lesson-type-english" data-ar="اللغة الإنجليزية" data-en="English language">English language</span>
+                            <h3 data-ar="قراءة إنجليزية تفاعلية" data-en="Interactive English reading">Interactive English reading</h3>
+                            <p data-ar="قراءة قصة قصيرة مع شرح المفردات، أسئلة فهم، ومشاركة مباشرة من الطالب." data-en="A short story lesson with vocabulary guidance, comprehension questions, and active student participation.">A short story lesson with vocabulary guidance, comprehension questions, and active student participation.</p>
+                        </div>
+                    </article>
+
+                    <article class="lesson-video-card lesson-video-card-english reveal">
+                        <div class="lesson-video-frame">
+                            <video controls playsinline preload="none"
+                                poster="{{ asset('images/english-supported-quran-lesson-poster.jpg') }}"
+                                data-label-ar="مقطع من حصة قرآن للطلاب الناطقين بالإنجليزية"
+                                data-label-en="A Quran lesson for English-speaking students"
+                                aria-label="A Quran lesson for English-speaking students">
+                                <source src="{{ asset('videos/english-supported-quran-lesson.mp4') }}" type="video/mp4">
+                                <span data-ar="متصفحك لا يدعم تشغيل الفيديو." data-en="Your browser does not support video playback.">Your browser does not support video playback.</span>
+                            </video>
+                            <span class="lesson-duration" aria-hidden="true">01:58</span>
+                        </div>
+                        <div class="lesson-video-copy">
+                            <span class="lesson-type lesson-type-english" data-ar="قرآن بالشرح الإنجليزي" data-en="Quran with English support">Quran with English support</span>
+                            <h3 data-ar="تعليم القرآن للناطقين بالإنجليزية" data-en="Quran for English-speaking learners">Quran for English-speaking learners</h3>
+                            <p data-ar="درس بصري مبسّط يساعد الطالب على متابعة السورة والتفاعل مع المعلّم خطوة بخطوة." data-en="A clear visual lesson that helps the learner follow the surah and engage with the teacher step by step.">A clear visual lesson that helps the learner follow the surah and engage with the teacher step by step.</p>
+                        </div>
+                    </article>
+
+                    <article class="lesson-video-card lesson-video-card-english reveal">
+                        <div class="lesson-video-frame">
+                            <video controls playsinline preload="none"
+                                poster="{{ asset('images/english-one-to-one-lesson-poster.jpg') }}"
+                                data-label-ar="مقطع من حصة فردية مباشرة باللغة الإنجليزية"
+                                data-label-en="A clip from a live one-to-one English lesson"
+                                aria-label="A clip from a live one-to-one English lesson">
+                                <source src="{{ asset('videos/english-one-to-one-lesson.mp4') }}" type="video/mp4">
+                                <span data-ar="متصفحك لا يدعم تشغيل الفيديو." data-en="Your browser does not support video playback.">Your browser does not support video playback.</span>
+                            </video>
+                            <span class="lesson-duration" aria-hidden="true">03:54</span>
+                        </div>
+                        <div class="lesson-video-copy">
+                            <span class="lesson-type lesson-type-english" data-ar="حصة فردية مباشرة" data-en="Live one-to-one lesson">Live one-to-one lesson</span>
+                            <h3 data-ar="تعلّم شخصي مع المعلمة" data-en="Personal learning with a dedicated teacher">Personal learning with a dedicated teacher</h3>
+                            <p data-ar="تفاعل مباشر يتيح للمعلمة الاستماع للطالبة، تصحيحها، وتشجيعها وفق مستواها ووتيرتها." data-en="A genuine one-to-one session where the teacher listens, corrects, and encourages the learner at her own pace.">A genuine one-to-one session where the teacher listens, corrects, and encourages the learner at her own pace.</p>
+                        </div>
+                    </article>
+                </div>
+
                 <div class="classroom-cta reveal">
                     <p data-ar="هل تريد تجربة الأسلوب بنفسك؟ حصتك الأولى مجانية." data-en="Ready to experience it yourself? Your first lesson is free.">Ready to experience it yourself? Your first lesson is free.</p>
                     <a href="#enroll" class="button button-small">

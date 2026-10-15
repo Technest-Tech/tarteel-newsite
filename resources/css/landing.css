@@ -1223,6 +1223,57 @@ html[lang="ar"] :is(.section-heading h2, .center-heading h2, .why-copy h2, .faq-
     font-size: var(--fs-sm);
 }
 
+.classroom-language-heading {
+    margin-block: clamp(2.25rem, 5vw, 3.5rem) 1.25rem;
+    padding-block-start: clamp(1.75rem, 4vw, 2.5rem);
+    border-block-start: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.classroom-language-mark {
+    flex: 0 0 auto;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: var(--forest);
+    box-shadow: 0 8px 22px rgba(18, 61, 44, .18);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: var(--fs-sm);
+    font-weight: 800;
+    letter-spacing: .06em;
+}
+
+.classroom-language-heading h3 {
+    margin: 0 0 .2rem;
+    color: var(--forest);
+    font-size: var(--fs-xl);
+    line-height: 1.35;
+}
+
+.classroom-language-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+}
+
+.classroom-grid-english {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lesson-video-card-english {
+    border-color: rgba(189, 149, 90, .3);
+}
+
+.lesson-type-english {
+    color: #6f501f;
+    background: #f5ead8;
+}
+
 .classroom-cta {
     margin-block-start: 2rem;
     padding: 1.1rem 1.25rem;
